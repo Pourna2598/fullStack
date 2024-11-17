@@ -1,0 +1,99 @@
+1. Design Documentation
+Application Architecture
+Frontend (React.js):
+
+Components: Dashboard, Login/Signup, Language Selection, Progress Tracker, Lesson Viewer, etc.
+State Management: React Context API for global state (user authentication, selected language, progress).
+Routes: React Router for navigation between different views.
+API calls: Axios for interacting with backend REST APIs.
+Backend (Node.js + Express.js):
+
+Controllers: Handle requests and business logic.
+Routes: Define API endpoints for authentication, learning materials, assessments, progress tracking.
+Services: Abstract the logic for interacting with the database.
+Authentication: JWT (JSON Web Tokens) for securing user sessions.
+Database: MongoDB (NoSQL) to store user data, lessons, assessments, and progress.
+Database Schema (MongoDB):
+
+Users:
+
+json
+Copy code
+{
+  "user_id": ObjectId,
+  "name": String,
+  "email": String,
+  "password": String (hashed),
+  "role": String (learner/admin),
+  "selected_language": String,
+  "progress": [ObjectId (Progress)]
+}
+Languages:
+
+json
+Copy code
+{
+  "language_id": ObjectId,
+  "name": String,
+  "lessons": [ObjectId (Lesson)],
+  "assessments": [ObjectId (Assessment)]
+}
+Lessons:
+
+json
+Copy code
+{
+  "lesson_id": ObjectId,
+  "title": String,
+  "content": String,
+  "media_type": String (audio/video/text),
+  "associated_language_id": ObjectId
+}
+Assessments:
+
+json
+Copy code
+{
+  "assessment_id": ObjectId,
+  "language_id": ObjectId,
+  "questions": [
+    {
+      "question_id": ObjectId,
+      "question_text": String,
+      "options": [String],
+      "correct_answer": String
+    }
+  ],
+  "feedback": String
+}
+Progress:
+
+json
+Copy code
+{
+  "user_id": ObjectId,
+  "language_id": ObjectId,
+  "completed_lessons": [ObjectId (Lesson)],
+  "test_scores": [ObjectId (Assessment)],
+  "completion_percentage": Number
+}
+UI/UX Wireframes:
+Create wireframes for the following pages using a tool like Figma or Adobe XD:
+
+Login/Signup Page: Forms for entering email and password, and links to reset the password.
+Dashboard: Displays user progress, selected language, and buttons for selecting lessons or assessments.
+Lesson Viewer: Interface for viewing lessons (text, images, audio players).
+Progress Tracker: Graphs and charts that show how far the user has come in their learning.
+You can create wireframes that look like this:
+
+Login/Signup Page
+
+A simple form with fields for Email, Password, and Submit button.
+Dashboard Page
+
+Display the user's progress and selected language with an option to select new languages.
+Button to browse lessons or take an assessment.
+Progress Tracker
+
+A visual representation (chart) of lesson completion and test scores.
+Progress bar or pie chart for percentage completion.
